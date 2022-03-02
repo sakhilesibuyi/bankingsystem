@@ -7,7 +7,7 @@
     - name: Install docker-py 
       pip:
         name: docker-py
-        state: forceinstall
+        state: forcereinstall
     - name: Start Container 
       docker_container:
         name: banksystem
