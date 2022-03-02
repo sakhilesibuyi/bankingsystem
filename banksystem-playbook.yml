@@ -3,12 +3,7 @@
   hosts: ansible_clients
   become: true
 
-  tasks:
-    - name: Running system update
-      apt: update_cache=yes
-        upgrade=safe
-      register: result
-    - debug: var=result.stdout_lines  
+  tasks: 
     - name: Install docker-py 
       pip:
         name: docker-py
