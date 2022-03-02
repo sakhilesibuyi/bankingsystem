@@ -4,10 +4,14 @@
   become: true
 
   tasks:
-  - name: Start Container 
-    docker_container:
-      name: banksystem
-      image: "saksman3/banksystem:{{DOCKER_TAG}}"
-      state: started
-      published_ports:
-        - 0.0.0.0:8000:8000
+    - name: install python
+      apt-get:
+        name: python-pip
+        state: present
+    - name: Start Container 
+      docker_container:
+        name: banksystem
+        image: "saksman3/banksystem:{{DOCKER_TAG}}"
+        state: started
+        published_ports:
+          - 0.0.0.0:8000:8000
