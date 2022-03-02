@@ -4,9 +4,13 @@
   become: true
 
   tasks:
-    - name: install python
-      apt-get:
+    - name: Install python pip
+      apt:
         name: python-pip
+        state: present
+    - name: Install docker-py
+      pip:
+        name: docker-py
         state: present
     - name: Start Container 
       docker_container:
