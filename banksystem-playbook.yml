@@ -6,8 +6,11 @@
   tasks: 
     - name: Install docker-py 
       pip:
-        name: docker-py
+        name: "{{ item.name }}"
+        version: "{{item.version}}"
         state: forcereinstall
+      with_items:
+      - { name: docker-py, verson: 1.10.0}
     - name: Start Container 
       docker_container:
         name: banksystem
