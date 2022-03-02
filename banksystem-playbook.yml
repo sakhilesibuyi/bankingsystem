@@ -1,0 +1,13 @@
+---
+- name: deploy-bank-system-container
+  hosts: ansible_clients
+  become: true
+
+  tasks:
+  - name: Start Container 
+    docker_container:
+      name: banksystem
+      image: "saksman3/banksystem:{{DOCKER_TAG}}"
+      state: started
+      published_ports:
+        - 0.0.0.0:8000:8000
