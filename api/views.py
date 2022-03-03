@@ -58,3 +58,8 @@ class ClientView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
+
+class AccountTypeView(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticated)
+    queryset = AccountType.objects.all()
+    serializer_class = AccountTypeSerializer
