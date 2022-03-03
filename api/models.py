@@ -37,11 +37,18 @@ class Client(models.Model):
     client_Address = models.CharField(max_length=250)
     def __str__(self):
         return self.name
+class AccountType(models.Model):
+    type = models.CharField(max_length=250)
 
 class Account(models.Model):
     owner = models.ForeignKey(Client, on_delete=models.CASCADE, related_name="account_owner")
-    account_type = models.CharField(max_length=250)
+    account_type = models.ForeignKey(AccountType, on_delete=models.CASCADE, related_name="acc_type")
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name="bank")
+    balance = models.FloatField(default=0.0)
+    def save(self, *args, **kwargs):
+        acc_type = AccountType.objects.filter(id=self.account_type)
+        print(acc_type)
+
     def __str__(self):
         return "{} - {} - {}".format(self.owner, self.bank, self.account_type)
 
