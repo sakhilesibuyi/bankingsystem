@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 import jwt, datetime
 
-from .models import User
-from .serializers import UserSerializer
+from .models import *
+from .serializers import *
 
 
 class RegisterView(APIView):
@@ -49,3 +49,16 @@ class LogOutView(APIView):
             "message":"success"
         }
         return response
+
+class BranchView(APIView):
+    def post(self,request):
+        serializer = BranchSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data)       
+    def get(self,request):
+        branches = Branch.objects.all()
+        serializers = BranchSerializer(branches, many=True)
+        return Response(serializers.data)
+
