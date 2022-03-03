@@ -52,3 +52,7 @@ class Transfer(models.Model):
 class Deposit(models.Model):
     amount = models.FloatField()
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
+
+class Withdrawal(models.Model):
+    amount = models.FloatField(null=True,blank=True)
+    account = models.ForeignKey(Account,on_delete=models.CASCADE)
