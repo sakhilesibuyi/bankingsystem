@@ -33,3 +33,8 @@ class BankSerializer(serializers.ModelSerializer):
         response =  super().to_representation(instance)
         response['branch'] = BranchSerializer(instance.branch).data
         return response
+class ClientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Client
+        fields =('__all__')
+        
