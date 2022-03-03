@@ -36,8 +36,8 @@ class LogOutView(APIView):
    
 class BranchView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
-    queryset = Bank.objects.all()
-    serializers_class = BranchSerializer
+    queryset = Branch.objects.all()
+    serializer_class = BranchSerializer
 
 class BranchDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated,)
