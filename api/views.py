@@ -12,6 +12,7 @@ from .serializers import *
 from .decorators import user_logged_in
 from rest_framework.decorators import api_view
 
+
 class RegisterView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
@@ -53,8 +54,8 @@ class LogOutView(APIView):
             "message":"success"
         }
         return response
+@api_view(['GET','POST'])
 @user_logged_in
-@api_view(['GET', 'POST'])
 def BranchView(request):
     if request.method == 'POST': #(self,request):
         serializer = BranchSerializer(data=request.data)
