@@ -49,7 +49,7 @@ class Account(models.Model):
     balance = models.FloatField(default=0.0)
     def save(self, *args, **kwargs):
         acc_type = AccountType.objects.filter(id=self.account_type)
-        print(acc_type)
+        print(acc_type) 
 
     def __str__(self):
         return "{} - {} - {}".format(self.owner, self.bank, self.account_type)

@@ -49,7 +49,7 @@ class AccountSerializer(serializers.ModelSerializer):
         fields = ('__all__')
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        response['owner'] = ClientSerializer(instance.account_owner).data
-        response['acc_type'] = AccountTypeSerializer(instance.acc_type).data
+        response['owner'] = ClientSerializer(instance.owner).data
+        response['account_type'] = AccountTypeSerializer(instance.account_type).data
         response['bank'] = BankSerializer(instance.bank).data
         return response

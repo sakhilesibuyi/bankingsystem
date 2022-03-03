@@ -13,7 +13,8 @@ from .views import (
      LogOutView,
      ClientView,
      AccountTypeView,
-     AccountView
+     AccountView,
+     AccountDetailView
      )
 
 # url patterns to be matched
@@ -30,5 +31,6 @@ urlpatterns = [
     re_path(r'^client/(?P<pk>[0-9]+)/', ClientView.as_view(),name="client-detail"), # gets matched when you include the id in the url, the id is expected to be a numeric value
     re_path(r'^bank/(?P<pk>[0-9]+)/', BankDetailView.as_view(), name="bank-detail"),
     re_path(r'^branch/(?P<pk>[0-9]+)/', BranchDetailView.as_view(), name="branch-detail"),
+    re_path(r'^accounts/(?P<pk>[0-9]+)/',AccountDetailView.as_view(), name="account-detail"),
 
 ]
