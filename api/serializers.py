@@ -4,17 +4,18 @@ from .models import User
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model=User
         fields = ['id','name','email','password']
+        #we do not want to return the password after successful registration
         extra_kwargs = {
-            'password':{
-                 'write_only':True
-                 }
+            'password':{'write_only':True} 
         }
-        def create(self, validated_data):
-            password=validated_data.pop('password',None)
-            instance = self.Meta.model(**validated_data)
-            if password is not None:
-                instance.set_password(password)
-            instance.save()
-            return instance
+    #Ensure the password value is hidden
+    def create(self, validated_data):
+        #Performing hashing on the password instance
+        password = validated_data.pop('password',None) # pop out the password from the validated data
+        instance = self.Meta.model(**validated_data) # get the instance without the extracted password
+        if password is not None:
+            instance.set_password(password) #hash it
+        instance.save() 
+        return instance
