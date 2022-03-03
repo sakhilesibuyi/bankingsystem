@@ -53,3 +53,8 @@ class BankDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Bank.objects.all()
     serializer_class = BankSerializer
+
+class ClientView(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializer
