@@ -4,7 +4,6 @@ cryptography
 Django
 django-filter
 djangorestframework
-jwt
 Markdown
 pycparser
 pytz
