@@ -22,3 +22,11 @@ class Branch(models.Model):
 class Bank(models.Model):
     bank_name = models.CharField(max_length=250)
     branch = models.ForeignKey(Branch,on_delete=models.CASCADE, related_name="branch")
+
+class ClientConsultant(models.Model):
+    name = models.CharField(max_length=250)
+
+class Client(models.Model):
+    name = models.CharField(max_length=250)
+    client_Address = models.CharField(max_length=250)
+
