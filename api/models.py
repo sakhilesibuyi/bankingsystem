@@ -21,4 +21,4 @@ class Branch(models.Model):
 
 class Bank(models.Model):
     bank_name = models.CharField(max_length=250)
-    branch = models.ForeignKey(Branch,on_delete=models.CASCADE)
+    branch = models.ForeignKey(Branch,on_delete=models.CASCADE, related_name="branch")

@@ -23,10 +23,13 @@ class UserSerializer(serializers.ModelSerializer):
 class BranchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Branch
-        fields = ['branch_name','branch_code']
-        read_only_fields = ['id']
+        fields = ['branch_name','branch_code','id']
 
 class BankSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bank
-        fields = ['__all__']
+        fields = ('__all__')
+    def to_representation(self, instance):
+        response =  super().to_representation(instance)
+        response['branch'] = BranchSerializer(instance.branch).data
+        return response

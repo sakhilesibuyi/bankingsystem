@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from distutils.log import log
 from urllib import request
+from wsgiref.util import request_uri
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
@@ -65,17 +66,18 @@ def BranchView(request):
         return Response(serializer.data)       
     if request.method == 'GET': #(self,request):
         branches = Branch.objects.all()
-        serializers = BranchSerializer(branches, many=True)
-        return Response(serializers.data)
+        serializer = BranchSerializer(branches, many=True)
+        return Response(serializer.data)
 
-"""class BranchView(APIView):
-    def post(self,request):
-        serializer = BranchSerializer(data=request.data)
+@api_view(['GET','POST'])
+@user_logged_in
+def BankView(request):
+    if request.method =='GET':
+        banks = Bank.objects.all()
+        serializer = BankSerializer(banks, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = BankSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-
-        return Response(serializer.data)       
-    def get(self,request):
-        branches = Branch.objects.all()
-        serializers = BranchSerializer(branches, many=True)
-        return Response(serializers.data) """
+        return Response(serializer.data)
