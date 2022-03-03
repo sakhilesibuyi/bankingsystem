@@ -10,5 +10,5 @@ WORKDIR /app
 RUN chmod +x ./scripts/
 
 
-CMD ["uwsgi","--http", "0.0.0.0:8000","--module", "auth.wsgi"]
+CMD ["uwsgi","--http", "0.0.0.0:8000","--module", "banksystem.wsgi"]
 
