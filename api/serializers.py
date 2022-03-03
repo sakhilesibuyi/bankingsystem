@@ -42,3 +42,14 @@ class AccountTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = AccountType
         fields = ('__all__')       
+
+class AccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = ('__all__')
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['owner'] = ClientSerializer(instance.account_owner).data
+        response['acc_type'] = AccountTypeSerializer(instance.acc_type).data
+        response['bank'] = BankSerializer(instance.bank).data
+        return response
