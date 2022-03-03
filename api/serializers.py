@@ -1,6 +1,6 @@
 from django.db.models import fields
 from rest_framework import serializers
-from .models import User
+from .models import *
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,3 +19,14 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password) #hash it
         instance.save() 
         return instance
+    
+class BranchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Branch
+        fields = ['branch_name','branch_code']
+        read_only_fields = ['id']
+
+class BankSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bank
+        fields = ['__all__']
