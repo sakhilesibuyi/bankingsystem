@@ -37,4 +37,8 @@ class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client
         fields =('__all__')
-        
+
+class AccountTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AccountType
+        fields = (__all__)       
