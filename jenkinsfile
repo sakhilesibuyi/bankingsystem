@@ -1,0 +1,42 @@
+pipeline{
+	agent any
+	environment {
+  	DOCKER_TAG = getCommitID()
+	}
+	stages{
+    	stage('SCM'){
+        	steps{
+            	git credentialsId: 'git',
+            	url: 'https://github.com/sakhilesibuyi/bankingsystem'
+        	}
+    	}
+    	stage('Docker Build'){
+        	steps{
+
+            	sh "docker build . -t saksman3/banksystem:${DOCKER_TAG}"
+        	}
+   	}
+    	stage('Push Docker Hub'){
+        	steps{
+            	withCredentials([string(credentialsId: 'docker_login', variable: 'dockerPassword')]) {
+              	sh "docker login -u saksman3 -p ${dockerPassword}"
+            	}
+            	sh "docker push saksman3/banksystem:${DOCKER_TAG}"
+        	}
+   	}
+   	stage('Deploy Container'){
+       	steps{
+          	ansiblePlaybook disableHostKeyChecking: true,
+          	extras: '-e DOCKER_TAG=${DOCKER_TAG}',
+          	installation: 'ansible',
+          	inventory: '/etc/ansible/hosts',
+          	playbook: 'banksystem-playbook.yml'
+       	}
+   	}
+	}
+}
+
+def getCommitID(){
+	def commitID = sh returnStdout: true, script: 'git rev-parse --short HEAD'
+	return commitID
+}

@@ -42,11 +42,18 @@ Make sure you have the packages below installed.
       * perform a deposit http://127.0.0.1:8000/api/deposit/ methods=>[POST]
       * perform a transfer http://127.0.0.1:8000/api/transfers/ methods=>[POST]
       * get transactions http://127.0.0.1:8000/api/transfers/ methods=>[GET,POST]
+---
 ## Docker container on Azure VM.
 you can also deploy the application into a docker container hosted in Azure Virtual machine.
 
 ### Setup the application employs DEV OPS Principles
 We will be using Ubuntu(18.04) running on windows Hyper-V
+Throughout the following steps we will assume that you have some knowledge around:
+   - Working with Docker containers ![Docker](https://www.docker.com/get-started)
+   - Working with Ansible ![Ansible](https://www.ansible.com/resources/get-started?hsLang=en-us)
+   - Working with Terraform **(Optional)**  ![Terraform](https://www.terraform.io/intro)
+   - Working knowledge around Unix 
+   - Working with Jenkins. ![Jenkins](https://www.jenkins.io/doc/book/)
 ### Prerequisites
 - Ansible
 - Python
@@ -62,5 +69,69 @@ We will be using Ubuntu(18.04) running on windows Hyper-V
      ![VM dteails](images/azure_vm_details.png)
      - Make sure that to create a firewall ingress rule for allowing tcp connection on port 8000 exists this is to open port 8000 which is the port that our container listens to, in short we will bind this container port to the host(VM) port.
      ![firewall rule](images/firewal_rule.png)
-     - in your cloned app make sure to navigate into settings.py and add your VM's public IP address and dns name if any.
+     - in your cloned app to navigate into bankingsystem/settings.py and add your VM's public IP address and dns name if any.
      ![allowed hosts](images/allowed_hosts.png)
+- create a jenkins pipeline make sure you update your own docker hub credentials by creating a credentials variable(dockerPassword) in jenkins credentials manager
+
+```pipeline{
+	agent any
+	environment {
+  	DOCKER_TAG = getCommitID()
+	}
+	stages{
+    	stage('SCM'){
+        	steps{
+            	git credentialsId: 'git',
+            	url: 'https://github.com/sakhilesibuyi/bankingsystem'
+        	}
+    	}
+    	stage('Docker Build'){
+        	steps{
+
+            	sh "docker build . -t saksman3/banksystem:${DOCKER_TAG}"
+        	}
+   	}
+    	stage('Push Docker Hub'){
+        	steps{
+            	withCredentials([string(credentialsId: 'docker_login', variable: 'dockerPassword')]) {
+              	sh "docker login -u saksman3 -p ${dockerPassword}"
+            	}
+            	sh "docker push saksman3/banksystem:${DOCKER_TAG}"
+        	}
+   	}
+   	stage('Deploy Container'){
+       	steps{
+          	ansiblePlaybook disableHostKeyChecking: true,
+          	extras: '-e DOCKER_TAG=${DOCKER_TAG}',
+          	installation: 'ansible',
+          	inventory: '/etc/ansible/hosts',
+          	playbook: 'banksystem-playbook.yml'
+       	}
+   	}
+	}
+}
+
+def getCommitID(){
+	def commitID = sh returnStdout: true, script: 'git rev-parse --short HEAD'
+	return commitID
+}
+```
+  - this pipeline will be used to
+    - clone the repo
+    - build the image based on the Dockerfile inside the cloned Repo
+    - push the image into Docker hub **you can use any other storage service like google cloud container registry**
+    - trigger Ansible deployment playbook **Configuration of the playbook included in file ansible-playbook.yml**
+
+  - Once you have done :monocle_face: with all above steps, build the pipeline and you should see the steps and statuses as in the picture below:
+  ![Pipeline](images/jenkins%20pipeline.JPG) 
+
+## Assuming that all steps above were successfull
+We will test this using postman you can download it here ![postman](https://www.postman.com/downloads/), you can also use the browser version.
+- from postman I have created a collection with all the endpoints available
+- I have also added session variables:
+  - Token - token that we will get upon successfull authentication.
+  - Host - the hostname
+Send a Login Request: ![Login Request](http://azbanksystem.eastus.cloudapp.azure.com
+:8000/api/login)
+![Login](images/login_postman.JPG)
+
