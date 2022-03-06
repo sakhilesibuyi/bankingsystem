@@ -24,15 +24,19 @@ Make sure you have the packages below installed.
  7. Populate the Database with some data `python load_data.py` to confirm if the insert was successful check logs in the file named app.log on your current working directory
  8. you can use curl or postman to make requests into the api. we will use curl
     - Register a new User ` curl http://127.0.0.1:8000/api/login -H "Content-type:application/x-www-form-urlencoded" -X POST -d "email=yourEmail&username=YourUsername&password=yourPassword"`
+    ![Register user](images/new_user.png)
     - login with the new created user ` curl http://127.0.0.1:8000/api/login -H "Content-type:application/x-www-form-urlencoded" -X POST -d "username=yourUSername&password=yourPassword"` you will get a token and that token should be included with all other requests that you make.
+    ![Login](images/login.PNG)
     - retrive available branches `curl http://127.0.0.1:8000/api/login -H "Authorization: Token {yourToken}"
+    ![Branches](images/branches.PNG)
     - Logout `curl http://127.0.0.1:8000/api/logout -X POST -H "Authorization: Token yourTokenhere"`
+    ![LOGOUT](images/logout.png)
     - ### Available Endpoints
       * list of branches  [http://127.0.0.1:8000//api/branches/]   methods=>[GET,POST]
       * list of banks http://127.0.0.1:8000//api/banks/  methods=>[GET,POST]
       * get list of accounts http://127.0.0.1:8000/api/accounts/  methods=>[GET,POST]
       * bank detail http://127.0.0.1:8000/api/bank/<int:id>/  methods=>[GET,PUT,DELETE]
-      * branch detail http://127.0.0.1:8000/api/branch/<int:id/   methods=>[GET,PUT,DELETE]
+      * branch detail http://127.0.0.1:8000/api/branch/<int:id>/   methods=>[GET,PUT,DELETE]
       * account detail http://127.0.0.1:8000/api/account/<int:id>/   methods=>[GET,PUT,DELETE]
       * perform a withdrawal http://127.0.0.1:8000/api/withdrawals/  methods=>[POST]
       * perform a deposit http://127.0.0.1:8000/api/deposit/ methods=>[POST]
