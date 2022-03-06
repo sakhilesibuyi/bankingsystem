@@ -1,9 +1,7 @@
-from decimal import MAX_EMAX
-from pyexpat import model
-from statistics import mode
-from tkinter import CASCADE
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 class User(AbstractUser):
@@ -41,18 +39,15 @@ class Client(models.Model):
         
 class AccountType(models.Model):
     type = models.CharField(max_length=250)
+    def __str__(self):
+        return self.type
 
 class Account(models.Model):
     owner = models.ForeignKey(Client, on_delete=models.CASCADE, related_name="account_owner")
     account_type = models.ForeignKey(AccountType, on_delete=models.CASCADE, related_name="acc_type")
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE, related_name="bank")
     balance = models.FloatField(default=0.0)
-    def save(self, *args, **kwargs):
-        acc_type = AccountType.objects.filter(id=self.account_type)
-        print(acc_type) 
-
-    def __str__(self):
-        return "{} - {} - {}".format(self.owner, self.bank, self.account_type)
+    
 
 class Transfer(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name="acc")

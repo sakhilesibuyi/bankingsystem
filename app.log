@@ -1,0 +1,28 @@
+2022-03-05 12:35:41,378 - root - INFO - query INSERT INTO api_branch (branch_name, branch_code) VALUES (?, ?);
+2022-03-05 12:35:41,378 - root - INFO - Connected to SQLite
+2022-03-05 12:35:41,417 - root - INFO - Total 4 Records inserted successfully into SqliteDb_developers table
+2022-03-05 12:35:41,417 - root - INFO - SQLite connection is closed
+2022-03-05 12:35:41,417 - root - INFO - query INSERT INTO api_bank(bank_name,branch_id) values(?,?)
+2022-03-05 12:35:41,433 - root - INFO - Connected to SQLite
+2022-03-05 12:35:41,449 - root - INFO - Total 4 Records inserted successfully into SqliteDb_developers table
+2022-03-05 12:35:41,449 - root - INFO - SQLite connection is closed
+2022-03-05 12:35:41,449 - root - INFO - query INSERT INTO api_client(name,address,contact_no) values(?,?,?)
+2022-03-05 12:35:41,449 - root - INFO - Connected to SQLite
+2022-03-05 12:35:41,464 - root - INFO - Total 2 Records inserted successfully into SqliteDb_developers table
+2022-03-05 12:35:41,464 - root - INFO - SQLite connection is closed
+2022-03-05 12:35:41,464 - root - INFO - query INSERT INTO api_accountType(type) values(?)
+2022-03-05 12:35:41,468 - root - INFO - Connected to SQLite
+2022-03-05 12:35:41,468 - root - INFO - Total 2 Records inserted successfully into SqliteDb_developers table
+2022-03-05 12:35:41,468 - root - INFO - SQLite connection is closed
+2022-03-05 12:35:41,468 - root - INFO - query INSERT INTO api_account(owner_id,account_type_id,bank_id,balance) values(?,?,?,?)
+2022-03-05 12:35:41,484 - root - INFO - Connected to SQLite
+2022-03-05 12:35:41,500 - root - INFO - Total 2 Records inserted successfully into SqliteDb_developers table
+2022-03-05 12:35:41,500 - root - INFO - SQLite connection is closed
+2022-03-05 12:35:41,500 - root - INFO - query INSERT INTO api_deposit(amount,account_id) values(?,?)
+2022-03-05 12:35:41,500 - root - INFO - Connected to SQLite
+2022-03-05 12:35:41,515 - root - INFO - Total 2 Records inserted successfully into SqliteDb_developers table
+2022-03-05 12:35:41,515 - root - INFO - SQLite connection is closed
+2022-03-05 12:35:41,515 - root - INFO - query INSERT INTO api_withdrawal(amount,account_id) values(?,?)
+2022-03-05 12:35:41,515 - root - INFO - Connected to SQLite
+2022-03-05 12:35:41,531 - root - INFO - Total 1 Records inserted successfully into SqliteDb_developers table
+2022-03-05 12:35:41,531 - root - INFO - SQLite connection is closed
