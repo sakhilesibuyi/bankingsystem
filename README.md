@@ -46,14 +46,15 @@ Make sure you have the packages below installed.
 ## Docker container on Azure VM.
 you can also deploy the application into a docker container hosted in Azure Virtual machine.
 
-### Setup the application employs DEV OPS Principles
+### the application employs DEV OPS Principles
+![DEVOPS ARCH](images/devops.JPG)
 We will be using Ubuntu(18.04) running on windows Hyper-V
 Throughout the following steps we will assume that you have some knowledge around:
-   - Working with Docker containers ![Docker](https://www.docker.com/get-started)
-   - Working with Ansible ![Ansible](https://www.ansible.com/resources/get-started?hsLang=en-us)
-   - Working with Terraform **(Optional)**  ![Terraform](https://www.terraform.io/intro)
+   - Working with Docker containers [Docker](https://www.docker.com/get-started)
+   - Working with Ansible [Ansible](https://www.ansible.com/resources/get-started?hsLang=en-us)
+   - Working with Terraform **(Optional)**  [Terraform](https://www.terraform.io/intro)
    - Working knowledge around Unix 
-   - Working with Jenkins. ![Jenkins](https://www.jenkins.io/doc/book/)
+   - Working with Jenkins. [Jenkins](https://www.jenkins.io/doc/book/)
 ### Prerequisites
 - Ansible
 - Python
@@ -126,12 +127,11 @@ def getCommitID(){
   ![Pipeline](images/jenkins%20pipeline.JPG) 
 
 ## Assuming that all steps above were successfull
-We will test this using postman you can download it here ![postman](https://www.postman.com/downloads/), you can also use the browser version.
+We will test this using postman you can download it here [postman](https://www.postman.com/downloads/), you can also use the browser version.
 - from postman I have created a collection with all the endpoints available
 - I have also added session variables:
   - Token - token that we will get upon successfull authentication.
   - Host - the hostname
-Send a Login Request: ![Login Request](http://azbanksystem.eastus.cloudapp.azure.com
-:8000/api/login)
+Send a Login Request: [Login Request](http://azbanksystem.eastus.cloudapp.azure.com:8000/api/login)
 ![Login](images/login_postman.JPG)
 
