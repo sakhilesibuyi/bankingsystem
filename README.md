@@ -20,7 +20,7 @@ Make sure you have the packages below installed.
  4. Start the app `python manage.py runserver` on first run you will notice that the app suggest that you do migrations to migrate models into db
  5. stop the app and run `python manage.py migrate` this will apply the models into the db.
  6. Run the app again using the command in step 4
- ![run app](/banksystem/images/run_app_after_migrate.png)
+ ![run app](images/run_app_after_migrate.png)
  7. Populate the Database with some data `python load_data.py` to confirm if the insert was successful check logs in the file named app.log on your current working directory
  8. you can use curl or postman to make requests into the api. we will use curl
     - Register a new User ` curl http://127.0.0.1:8000/api/login -H "Content-type:application/x-www-form-urlencoded" -X POST -d "email=yourEmail&username=YourUsername&password=yourPassword"`
