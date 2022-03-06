@@ -42,3 +42,24 @@ Make sure you have the packages below installed.
       * perform a deposit http://127.0.0.1:8000/api/deposit/ methods=>[POST]
       * perform a transfer http://127.0.0.1:8000/api/transfers/ methods=>[POST]
       * get transactions http://127.0.0.1:8000/api/transfers/ methods=>[GET,POST]
+## Docker container on Azure VM.
+you can also deploy the application into a docker container hosted in Azure Virtual machine.
+
+### Setup the application employs DEV OPS Principles
+We will be using Ubuntu(18.04) running on windows Hyper-V
+### Prerequisites
+- Ansible
+- Python
+- docker
+- jenkins server
+- Azure Account(Assuming that you already have an account and done your setup.)
+  - Provision a Virtual Machine ** The app can also be deployed using  Azure Container service.
+  - You can also use Terraform to provision your VM - please not should you wish to use terraform then use the file named  (provision.tf)
+  - Once your VM or VM's have been provisioned Take note of:
+     - Public IP Address
+     - DNS name if enabled.
+     ![VM dteails](images/azure_vm_details.png)
+     - Make sure that to create a firewall ingress rule for allowing tcp connection on port 8000 exists this is to open port 8000 which is the port that our container listens to, in short we will bind this container port to the host(VM) port.
+     ![firewall rule](images/firewal_rule.png)
+     - in your cloned app make sure to navigate into settings.py and add your VM's public IP address and dns name if any.
+     ![allowed hosts](images/allowed_hosts.JPG)
