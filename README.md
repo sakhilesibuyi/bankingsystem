@@ -129,9 +129,32 @@ def getCommitID(){
 ## Assuming that all steps above were successfull
 We will test this using postman you can download it here [postman](https://www.postman.com/downloads/), you can also use the browser version.
 - from postman I have created a collection with all the endpoints available
-- I have also added session variables:
+- I have also added postman global variables to store:
   - Token - token that we will get upon successfull authentication.
-  - Host - the hostname
-Send a Login Request: [Login Request](http://azbanksystem.eastus.cloudapp.azure.com:8000/api/login)
+  - Host - the hostname(local or azure hosted)
+  ![postman globals](images/postman_globals.png)
+### Send a Login Request:
+ [register Request](http://azbanksystem.eastus.cloudapp.azure.com:8000/api/register)
+![register](images/register_postman.JPG)
+
+### Register a new User:
+ [Login Request](http://azbanksystem.eastus.cloudapp.azure.com:8000/api/login)
 ![Login](images/login_postman.JPG)
 
+
+### Get Branches
+[Get Branches](http://azbanksystem.eastus.cloudapp.azure.com:8000/api/branches/)
+![Branches](images/branches_postman.JPG)
+
+### Get Branch Details by ID
+[Get Branch](http://azbanksystem.eastus.cloudapp.azure.com:8000/api/branch/1/)
+![Branches](images/get_branch_postman.JPG)
+
+### Edit Branch
+[Edit Branch](http://azbanksystem.eastus.cloudapp.azure.com:8000/api/branch/1/)
+![Branches](images/edit_branch_postman.JPG)
+### LOGOUT 
+[Logout](http://azbanksystem.eastus.cloudapp.azure.com:8000/api/logout)
+![Logout](images/logout_postman.JPG)
+### GET BRANCHES AFTER LOGGING OUT
+[get_branches after logout](images/unauthorized.png)
