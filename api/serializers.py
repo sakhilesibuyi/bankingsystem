@@ -1,7 +1,7 @@
 from django.db.models import fields
 from rest_framework import serializers
 from .models import *
-
+from django.http import JsonResponse 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model=User
@@ -30,6 +30,7 @@ class BankSerializer(serializers.ModelSerializer):
         model = Bank
         fields = ('__all__')
     def to_representation(self, instance):
+        print("bank",instance)
         response =  super().to_representation(instance)
         response['branch'] = BranchSerializer(instance.branch).data
         return response

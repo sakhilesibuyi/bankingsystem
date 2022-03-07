@@ -1,14 +1,12 @@
 from __future__ import unicode_literals
-from distutils.log import log
 from urllib import request
-from wsgiref.util import request_uri
-from django.http import QueryDict
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.exceptions import AuthenticationFailed, ValidationError
 from rest_framework.permissions import IsAuthenticated
 import jwt, datetime
 from rest_framework import generics
+from django.http import JsonResponse 
 
 from .models import *
 from .serializers import *

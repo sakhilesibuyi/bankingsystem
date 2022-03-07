@@ -158,3 +158,4 @@ We will test this using postman you can download it here [postman](https://www.p
 ![Logout](images/logout_postman.JPG)
 ### GET BRANCHES AFTER LOGGING OUT
 ![get_branches after logout](images/unauthorized.png)
+
