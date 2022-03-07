@@ -153,8 +153,8 @@ We will test this using postman you can download it here [postman](https://www.p
 ### Edit Branch
 [Edit Branch](http://azbanksystem.eastus.cloudapp.azure.com:8000/api/branch/1/)
 ![Branches](images/edit_branch_postman.JPG)
-### LOGOUT 
+### Logout
 [Logout](http://azbanksystem.eastus.cloudapp.azure.com:8000/api/logout)
 ![Logout](images/logout_postman.JPG)
 ### GET BRANCHES AFTER LOGGING OUT
-[get_branches after logout](images/unauthorized.png)
+![get_branches after logout](images/unauthorized.png)

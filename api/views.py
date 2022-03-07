@@ -72,4 +72,4 @@ class AccountView(generics.ListCreateAPIView):
 class AccountDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Account.objects.all()
-    serializer_class = AccountTypeSerializer
+    serializer_class = AccountSerializer

@@ -38,7 +38,11 @@ class Client(models.Model):
         return self.name
         
 class AccountType(models.Model):
-    type = models.CharField(max_length=250)
+    type_choices = [
+        ('SAVINGS','S'),
+        ('CREDIT','CR')
+    ]
+    type = models.CharField(max_length=250, choices=type_choices)
     def __str__(self):
         return self.type
 
